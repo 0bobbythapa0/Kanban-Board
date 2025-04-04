@@ -15,15 +15,7 @@
                     <h3>Todo</h3>
                 </div>
                 <div class="main-content">
-                    <ul>
-                        <li>
-                            <p>Learn HTML</p>
-                            <button class="remove">X</button>
-                        </li>
-                        <li>
-                            <p>Learn HTML</p>
-                            <button class="remove">X</button>
-                        </li>
+                    <ul id="list">
                     </ul>
                 </div>
                 <button id="popup">+ Add</button>
@@ -32,7 +24,8 @@
                 <div class="heading">
                     <h3>In Progess</h3>
                 </div>
-                <div class="m-content"></div>
+                <div class="m-content">
+                </div>
             </div>
             <div class="items">
                 <div class="heading">
@@ -41,6 +34,14 @@
                 <div class="m-content"></div>
             </div>
         </div>
+        <div id="box">
+            <input id="input-box" placeholder="Enter task" type="text">
+            <div class="btns">
+                <button class="btn" id="cancel">cancel</button>
+                <button class="btn" id="submit">submit</button>
+            </div>
+        </div>
     </div>
+    <script src="./script.js"></script>
 </body>
 </html>
