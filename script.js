@@ -26,6 +26,8 @@ popBtn.addEventListener("click",()=>{
     input.focus();
 })
 
+let liCounter = 0;
+
 // click on 'submit' button
 submit.addEventListener("click",()=>{
 
@@ -55,13 +57,28 @@ submit.addEventListener("click",()=>{
         // event listener is added
         button.addEventListener("click",(e)=>{
             // when it is clicked the task(li) is removed from the unordered list
-            ul.removeChild(e.target.parentNode);
+            //ul.removeChild(e.target.parentNode);
+            const parent = e.target.parentNode.parentNode;
+            const child = e.target.parentNode;
+            parent.removeChild(child);
         })
         
         // p is inserted inside the li
         li.appendChild(p);
         // button is inserted inside the li
         li.appendChild(button);
+
+        // apply draggable on the element
+        li.setAttribute("draggable",true);
+
+        // set id to identify uniquely
+        li.setAttribute("id",`dragElement-${liCounter++}`);
+
+        // store data which is being transferred
+        li.addEventListener("dragstart",(e)=>{
+            e.dataTransfer.setData("text",e.target.id);
+        })
+
         // li is inserted inside the ul
         ul.appendChild(li);
         // input box is empty
@@ -82,3 +99,26 @@ cancel.addEventListener("click",()=>{
     // then show class is removed to make it invisible
     box.classList.remove("show");
 })
+
+// get all the ul elements
+const list = document.querySelectorAll("ul");
+
+// iterate over all the ul elements
+for(let i=0;i<list.length;i++)
+{
+    // add dragover
+    list[i].addEventListener("dragover",(e)=>{
+        e.preventDefault();
+    })
+
+    // add drop 
+    list[i].addEventListener("drop",(e)=>{
+        e.preventDefault();
+        // get the id being dropped 
+        const data = e.dataTransfer.getData('text');
+
+        // using the id get the element and append it to parent
+        list[i].appendChild(document.getElementById(data));
+    })
+
+}
