@@ -71,12 +71,13 @@ submit.addEventListener("click",()=>{
         // apply draggable on the element
         li.setAttribute("draggable",true);
 
-        // set id to identify uniquely
-        li.setAttribute("id",`dragElement-${liCounter++}`);
-
         // store data which is being transferred
         li.addEventListener("dragstart",(e)=>{
-            e.dataTransfer.setData("text",e.target.id);
+            li.classList.add("element");
+        })
+
+        li.addEventListener("dragend",(e)=>{
+            li.classList.remove("element");
         })
 
         // li is inserted inside the ul
@@ -108,17 +109,7 @@ for(let i=0;i<list.length;i++)
 {
     // add dragover
     list[i].addEventListener("dragover",(e)=>{
-        e.preventDefault();
+        const data = document.querySelector(".element");
+        list[i].appendChild(data);
     })
-
-    // add drop 
-    list[i].addEventListener("drop",(e)=>{
-        e.preventDefault();
-        // get the id being dropped 
-        const data = e.dataTransfer.getData('text');
-
-        // using the id get the element and append it to parent
-        list[i].appendChild(document.getElementById(data));
-    })
-
 }
